@@ -1,72 +1,69 @@
 ---
-import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
 import Project from "../components/Project.astro";
-import Sidebar from "../components/Sidebar.astro";
+
 const projects = [
   {
-    title: "CodeCraft",
+    title: "Quick Link",
     desc: [
-      "Developed a large-scale e-commerce platform for indie game developers",
-      "Designed and implemented UI, backend, and database architecture",
-      "Contributed to RESTful API and GraphQL design",
-      "Led a team of three engineers for several months"
+      "Developed a modern URL shortener focused on speed, simplicity, and usability",
+      "Implemented custom short links, QR code generation, and real-time link analytics",
+      "Built backend services to track clicks, device type, and city-level location data",
+      "Designed and integrated a clean UI with a scalable backend architecture"
     ],
-    tech: ["React", "Next.js", "Node.js", "MongoDB", "Heroku"]
+    tech: ["React", "Tailwind CSS", "ShadCN", "Supabase"],
+    link: "https://github.com/utsxvv/quick-link"
   },
   {
-    title: "CloudMason",
+    title: "Library Management System",
     desc: [
-      "Contributed to microservices architecture design for email distribution system",
-      "Created a backend infrastructure with queues and an event bus",
-      "Designed to handle a high volume ~3 million emails per day"
+      "Developed a web-based Library Management System to handle core library workflows",
+      "Implemented book management, user authentication, and issue/return tracking",
+      "Designed fast prefix-based book search using Trie for efficient querying",
+      "Improved performance using caching techniques such as LRU for recently viewed books"
     ],
-    tech: ["Node.js", "RabbitMQ", "Docker", "Kubernetes"]
+    tech: ["Django", "Python", "Tailwind CSS", "JavaScript", "SQLite"],
+    link: "https://github.com/utsxvv/Library-Management-System"
   },
   {
-    title: "Sarah (HealthEase.io)",
+    title: "TixHub - Movie Ticket Booking System",
     desc: [
-      "Contributed to Israel's largest telehealth platform for doctors and patients",
-      "Developed appointment and billing systems",
-      "Resolved live production bugs and server issues"
+      "Built a Django-based movie ticket booking platform with real-time seat management",
+      "Handled seat locking and availability updates during booking",
+      "Integrated Razorpay demo payments for transactional flow",
+      "Designed modular backend logic for shows, seats, and bookings"
     ],
-    tech: ["React", "Node.js", "Express.js", "MySQL", "AWS"]
-  }
+    tech: ["Django", "Python", "Tailwind CSS", "JavaScript", "SQLite"],
+    link: "https://github.com/ShreyanshPadhiyar10/TixHub"
+  },
 ];
 ---
 
-<!DOCTYPE html>
-<html
->
-  <Header title="Software Development | Sam Bernstein" />
-  <body>
-    <div class="content">
-        <Sidebar selectedItem="software-development" />
-      <nav class="main">
-        <div class="container">
-          <div class="back-nav-container">
-            <a href="/" class="back-nav-button w-inline-block"
-              ><img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
-              <div>Back</div></a
-            >
-          </div>
-          <div class="content-container">
-            <h1>Software Development</h1>
-            <section class="items-container">
-                <div class="resouce-items">
-                    {projects.map(project => (
-                      <Project 
-                        title={project.title} 
-                        desc={project.desc}
-                        tech={project.tech}
-                      />
-                    ))}
-                  </div>
-            </section>
-          </div>
-        </div>
-      </nav>
-    </div>
+<Layout title="Software Development | Utsav Patel" selectedItem="software-development">
+  <div class="back-nav-container">
+    <a href="/" class="back-nav-button w-inline-block">
+      <img src="/assets/svg/back.svg" loading="lazy" alt="" class="back-nav-img" />
+      <div>Back</div>
+    </a>
+  </div>
 
-    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-  </body>
-</html>
+  <div class="content-container">
+    <h1>Software Development</h1>
+    <p class="section-description">
+      A collection of full-stack applications and systems focusing on clean architecture, efficient data structures, and seamless user experiences.
+    </p>
+
+    <section class="items-container">
+      <div class="resouce-items">
+        {projects.map(project => (
+          <Project 
+            title={project.title} 
+            desc={project.desc}
+            tech={project.tech}
+            link={project.link}
+          />
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>

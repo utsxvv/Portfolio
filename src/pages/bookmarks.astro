@@ -1,0 +1,282 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BookmarkItem from "../components/BookmarkItem.astro";
+
+const myBookmarks = [
+  { 
+    name: "Magic UI", 
+    desc: "A collection of modern UI components and animations for creating visually rich websites.", 
+    href: "https://magicui.design/", 
+    displayUrl: "magicui.design" 
+  },
+  { 
+    name: "Cofolios", 
+    desc: "A showcase of modern developer portfolios and creative personal websites.", 
+    href: "https://www.cofolios.com/", 
+    displayUrl: "cofolios.com" 
+  },
+  { 
+    name: "Jitter", 
+    desc: "A browser-based motion design tool for crafting UI animations and engaging visual effects.", 
+    href: "https://jitter.video/", 
+    displayUrl: "jitter.video" 
+  },
+  { 
+    name: "SEO Studio", 
+    desc: "A free platform providing SEO tools along with developer utilities and converters.", 
+    href: "https://seostudio.tools/", 
+    displayUrl: "seostudio.tools" 
+  },
+  { 
+    name: "Product Hunt", 
+    desc: "A platform for discovering, launching, and discussing new tech products and startups.", 
+    href: "https://www.producthunt.com/", 
+    displayUrl: "producthunt.com" 
+  },
+  { 
+    name: "Hugeicons", 
+    desc: "A collection of free, high-quality icons for developers and designers.", 
+    href: "https://hugeicons.com/", 
+    displayUrl: "hugeicons.com" 
+  },
+  { 
+    name: "Color Hunt", 
+    desc: "A curated collection of beautiful color palettes for designers and developers.", 
+    href: "https://colorhunt.co/", 
+    displayUrl: "colorhunt.co" 
+  },
+  { 
+    name: "Public APIs", 
+    desc: "A Github repository of free, open APIs for development across various categories.", 
+    href: "https://github.com/public-apis/public-apis", 
+    displayUrl: "github.com/public-apis" 
+  },
+  {
+    name: "Design Spells",
+    desc: "A curated collection of delightful micro-interactions and design details.",
+    href: "https://www.designspells.com/",
+    displayUrl: "designspells.com"
+  },
+  {
+    name: "Refero",
+    desc: "A vast library of high-quality UI/UX references for web and iOS design.",
+    href: "https://refero.design/",
+    displayUrl: "refero.design"
+  },
+  {
+    name: "Unblast",
+    desc: "A curated selection of premium design assets and resources for free.",
+    href: "https://unblast.com/",
+    displayUrl: "unblast.com"
+  },
+  {
+    name: "Best website a programmer should visit",
+    desc: "A comprehensive GitHub directory of essential websites for developers and students.",
+    href: "https://github.com/sdmg15/Best-websites-a-programmer-should-visit",
+    displayUrl: "github.com/sdmg15/Best-websites-a-programmer-should-visit"
+  },
+  {
+    name: "Awesome",
+    desc: "The definitive collection of curated lists covering almost every topic in computing.",
+    href: "https://github.com/sindresorhus/awesome",
+    displayUrl: "github.com/sindresorhus/awesome"
+  }
+];
+
+const ITEMS_PER_PAGE = 6;
+---
+
+<Layout title="Bookmarks | Utsav Patel" selectedItem="bookmarks">
+  <div class="back-nav-container">
+    <a href="/" class="back-nav-button w-inline-block">
+      <img src="/assets/svg/back.svg" loading="lazy" alt="" class="back-nav-img" />
+      <div>Back</div>
+    </a>
+  </div>
+
+  <div class="content-container">
+    <h1>Bookmarks</h1>
+    <p class="section-description">
+      A curated collection of insightful websites, media, and literature found across the web that contribute to technical and creative growth.
+    </p>
+    <p class="work-in-progress">Continually updated with new discoveries and resources.</p>
+
+    <div id="bookmarks-list" class="bookmarks-grid">
+      {myBookmarks.map((bookmark, index) => (
+        <div class="bookmark-wrapper" data-index={index} style={index >= ITEMS_PER_PAGE ? "display: none;" : ""}>
+          <BookmarkItem {...bookmark} />
+        </div>
+      ))}
+    </div>
+
+    <div class="pagination-minimal">
+      <img 
+        id="prev-page" 
+        src="/assets/svg/back.svg" 
+        class="nav-icon disabled" 
+        alt="Previous" 
+        role="button"
+      />
+      
+      <div class="page-counter">
+        <span id="current-page-num">1</span>
+        <span class="divider">/</span>
+        <span>{Math.ceil(myBookmarks.length / ITEMS_PER_PAGE)}</span>
+      </div>
+
+      <img 
+        id="next-page" 
+        src="/assets/svg/back.svg" 
+        class="nav-icon flip" 
+        alt="Next" 
+        role="button"
+      />
+    </div>
+  </div>
+</Layout>
+
+<script define:vars={{ ITEMS_PER_PAGE, totalItems: myBookmarks.length }}>
+  let currentPage = 1;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+  function updateDisplay(shouldScroll = true) {
+    const items = document.querySelectorAll('.bookmark-wrapper');
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+
+    items.forEach((item, index) => {
+      item.style.display = (index >= start && index < end) ? 'block' : 'none';
+    });
+
+    const prevIcon = document.getElementById('prev-page');
+    const nextIcon = document.getElementById('next-page');
+    const pageNum = document.getElementById('current-page-num');
+
+    if (prevIcon) prevIcon.classList.toggle('disabled', currentPage === 1);
+    if (nextIcon) nextIcon.classList.toggle('disabled', currentPage === totalPages);
+    if (pageNum) pageNum.textContent = currentPage;
+    
+    if (shouldScroll) {
+      requestAnimationFrame(() => {
+        const listTop = document.getElementById('bookmarks-list');
+        if (listTop) {
+          listTop.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    currentPage = 1;
+
+    document.getElementById('prev-page')?.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        updateDisplay(true);
+      }
+    });
+
+    document.getElementById('next-page')?.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        updateDisplay(true);
+      }
+    });
+    
+    updateDisplay(false);
+  });
+</script>
+
+<style>
+  .content-container {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .section-description {
+    color: #888;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .work-in-progress {
+    color: #666;
+    font-size: 0.85rem;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .work-in-progress::before {
+    content: "*";
+    color: #888;
+    font-style: normal;
+    font-weight: bold;
+  }
+
+  .bookmarks-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 300px;
+    scroll-margin-top: 100px; 
+  }
+
+  .pagination-minimal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 48px;
+    width: 100%;
+  }
+
+  .nav-icon {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 0.4;
+    user-select: none;
+  }
+
+  .nav-icon:hover:not(.disabled) {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+
+  .nav-icon.disabled {
+    opacity: 0.05;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .flip {
+    transform: rotate(180deg);
+  }
+
+  .nav-icon.flip:hover:not(.disabled) {
+    transform: rotate(180deg) scale(1.1);
+  }
+
+  .page-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #444;
+    user-select: none;
+    letter-spacing: 2px;
+  }
+
+  #current-page-num {
+    color: #888;
+  }
+
+  .divider {
+    margin: 0 2px;
+    opacity: 0.2;
+  }
+</style>

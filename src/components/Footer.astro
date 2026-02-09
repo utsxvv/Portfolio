@@ -1,0 +1,221 @@
+---
+import LikeButton from "../react/LikeButton.jsx";
+const currentYear = new Date().getFullYear();
+import { ShinyButton } from "../react/shiny-button.tsx"
+---
+
+<footer class="footer-wrapper">
+  <div class="footer-container">
+    <div class="footer-grid">
+      
+      <div class="column socials-column">
+        <div class="social-icons">
+          {
+            [
+              {
+                href: "https://github.com/utsxvv",
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"></path></svg>',
+                label: "GitHub",
+              },
+              {
+                href: "https://linkedin.com/in/utsxvv",
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.3362 18.339H15.6707V14.1622C15.6707 13.1662 15.6505 11.8845 14.2817 11.8845C12.892 11.8845 12.6797 12.9683 12.6797 14.0887V18.339H10.0142V9.75H12.5747V10.9207H12.6092C12.967 10.2457 13.837 9.53325 15.1367 9.53325C17.8375 9.53325 18.337 11.3108 18.337 13.6245V18.339H18.3362ZM7.00373 8.57475C6.14573 8.57475 5.45648 7.88025 5.45648 7.026C5.45648 6.1725 6.14648 5.47875 7.00373 5.47875C7.85873 5.47875 8.55173 6.1725 8.55173 7.026C8.55173 7.88025 7.85798 8.57475 7.00373 8.57475ZM8.34023 18.339H5.66723V9.75H8.34023V18.339ZM19.6697 3H4.32923C3.59498 3 3.00098 3.5805 3.00098 4.29675V19.7033C3.00098 20.4202 3.59498 21 4.32923 21H19.6675C20.401 21 21.001 20.4202 21.001 19.7033V4.29675C21.001 3.5805 20.401 3 19.6675 3H19.6697Z"></path></svg>',
+                label: "LinkedIn",
+              },
+              {
+                href: "https://buymeacoffee.com/utsxvv",
+                icon: `<svg viewBox="0 0 24 24" class="icon-svg" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="m20.216 6.415-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 0 0-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 0 0-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 0 1-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 0 1 3.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 0 1-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 0 1-4.743.295 37.059 37.059 0 0 1-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0 0 11.343.376.483.483 0 0 1 .535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 0 1 .39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 0 1-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 0 1-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 0 0-1.322-.238c-.826 0-1.491.284-2.26.613z"/>
+                </svg>`,
+                label: "Buy Me A Coffee",
+              },
+              {
+                href: "https://mail.google.com/mail/?view=cm&fs=1&to=utssavvpatel@gmail.com&su=Inquiry%20from%20Portfolio&body=Hi%20Utsav,",
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="m18.73 5.41l-1.28 1L12 10.46L6.55 6.37l-1.28-1A2 2 0 0 0 2 7.05v11.59A1.36 1.36 0 0 0 3.36 20h3.19v-7.72L12 16.37l5.45-4.09V20h3.19A1.36 1.36 0 0 0 22 18.64V7.05a2 2 0 0 0-3.27-1.64"/></svg>',
+                label: "Email",
+              },
+            ].map((link) => (
+              <a href={link.href} target="_blank" class="social-link" aria-label={link.label}>
+                <div class="icon-svg" set:html={link.icon} />
+              </a>
+            ))
+          }
+        </div>
+        <div class="like-section mt-6">
+          <ShinyButton 
+            client:load 
+            className="rounded-full h-10 px-6"
+          >
+            <LikeButton client:load />
+          </ShinyButton>
+        </div>
+      </div>
+
+      <div class="column spotify-column">
+        <div class="spotify-wrapper">
+          <iframe 
+            data-testid="embed-iframe" 
+            style="border-radius:12px; border: 0" 
+            src="https://open.spotify.com/embed/playlist/6ejgX9fGrnavtEibXvNwEP?utm_source=generator&theme=0" 
+            width="120%" 
+            height="152" 
+            frameBorder="0"
+            allowfullscreen="" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="wip">
+      <p class="wip-notice">
+        This site is still a work in progress, you might see some broken things.
+      </p>
+    </div>
+
+
+    <div class="footer-bottom">
+      <div class="bottom-info">
+        <p>
+          Copyright © {currentYear} 
+          <a href="https://github.com/utsxvv" class="copyright-link">Utsav Patel</a>.
+        </p>
+        <p class="attribution">
+          Built with <span class="heart"> ❤ </span> by Utsav. 
+          Design inspired by <a href="https://codefolio-pi.vercel.app/" target="_blank">Daniel Alter</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-wrapper {
+    width: 100%;
+    padding: 2rem 0 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: auto;
+    background: transparent;
+  }
+
+  .footer-container {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .social-link {
+    color: #555;
+    transition: all 0.3s ease;
+  }
+
+  .social-link:hover {
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .icon-svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .spotify-wrapper {
+    width: 120%;
+    min-width: 250px;
+    max-width: 300px;
+  }
+
+  .spotify-wrapper iframe {
+    margin-left: -10%; 
+  }
+
+  .footer-bottom {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+  }
+
+  .wip {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .wip-notice {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+
+  .bottom-info {
+    font-size: 0.875rem;
+    color: #555;
+  }
+
+  .copyright-link {
+    color: #777;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .copyright-link:hover {
+    color: #fff;
+  }
+
+  .attribution {
+    font-size: 0.75rem;
+    color: #444;
+    margin-top: 4px;
+  }
+
+  .attribution a {
+    color: #666;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .heart {
+    color: #a8a8a8;
+    font-size: 0.9rem;
+    margin: 0 2px;
+    transition: color 0.2s ease;
+  }
+
+  .heart:hover {
+    color: #fff;
+  }
+
+  .like-section {
+    display: flex;
+    justify-content: center;
+  }
+</style>

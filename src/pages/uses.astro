@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+import UsesItem from "../components/UsesItem.astro";
+
+const myUses = [
+  {
+    name: "VS Code Insiders",
+    icon: "/assets/svg/vscode_insiders.svg",
+    desc: "Primary editor for daily development. Utilizes the Insiders build to access latest features and early tool integrations.",
+    href: "https://code.visualstudio.com/insiders/"
+  },
+  {
+    name: "Postman",
+    icon: "/assets/svg/postman.svg",
+    desc: "API platform for development and testing. Handles request automation, documentation, and endpoint monitoring.",
+    href: "https://www.postman.com/"
+  },
+  {
+    name: "Git & GitHub",
+    icon: "/assets/svg/github.svg",
+    desc: "Cloud platform for version control and collaboration. Manages repositories, pull requests, and CI/CD workflows.",
+    href: "https://github.com/"
+  },
+  {
+    name: "Notion",
+    icon: "/assets/svg/notion.svg",
+    desc: "All-in-one workspace for documentation, note-taking, and project management.",
+    href: "https://www.notion.so/"
+  },
+  {
+    name: "Arc Browser",
+    icon: "/assets/svg/arc.svg",
+    desc: "Chromium-based 'internet computer' featuring vertical tab management, context-specific 'Spaces', and split-view multitasking.",
+    href: "https://arc.net/"
+  },
+  {
+    name: "Raycast",
+    icon: "/assets/svg/raycast.svg",
+    desc: "Command palette for quick access to applications, files, and system commands, enhancing workflow efficiency.",
+    href: "https://www.raycast.com/"
+  }
+];
+---
+
+<Layout title="Uses | Utsav Patel" selectedItem="uses">
+  <div class="back-nav-container">
+    <a href="/" class="back-nav-button w-inline-block">
+      <img src="/assets/svg/back.svg" loading="lazy" alt="" class="back-nav-img" />
+      <div>Back</div>
+    </a>
+  </div>
+
+  <div class="content-container">
+    <h1>Uses</h1>
+    <p class="section-description">
+      A curated software stack and technical specifications utilized for development, environment configuration, and professional workflows.
+    </p>
+
+    <div class="uses-grid">
+      {myUses.map((use) => (
+        <UsesItem {...use} />
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .section-description {
+    color: #888;
+    margin-bottom: 30px;
+    max-width: 800px;
+    line-height: 1.6;
+  }
+  
+  .uses-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .uses-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

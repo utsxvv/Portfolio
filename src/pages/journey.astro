@@ -1,0 +1,74 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TimelineItem from "../components/TimelineItem.astro";
+
+const journey = [
+  {
+    date: "August 2025 - Present",
+    title: "M.Sc. AI/ML",
+    company: "Gujarat University, Gujarat, India",
+    desc: "Pursuing a master’s degree in AI and machine learning, with a focus on core ML concepts, data-driven problem solving, and applied projects.",
+    type: "Education"
+  },
+  {
+    date: "September 2024 - March 2025",
+    title: "Magento 2 Backend Intern",
+    company: "Evrig Solutions, Gujarat, India",
+    desc: "Gained hands-on experience in Magento 2 backend development, focusing on module customization and performance optimization.",
+    type: "Internship"
+  },
+  {
+    date: "August 2022 - May 2025",
+    title: "B.Sc. IT Software Development",
+    company: "Gujarat University, Gujarat, India",
+    desc: "Specializing in Software Development (Web & Mobile).",
+    type: "Education"
+  }
+];
+---
+
+<Layout title="My Journey | Utsav Patel" selectedItem="journey">
+  <div class="back-nav-container">
+    <a href="/" class="back-nav-button w-inline-block">
+      <img src="/assets/svg/back.svg" loading="lazy" alt="" class="back-nav-img" />
+      <div>Back</div>
+    </a>
+  </div>
+
+  <div class="content-container">
+    <h1>My Journey</h1>
+    <p class="section-description">
+      A chronological overview of professional experiences and academic milestones in software engineering and artificial intelligence.
+    </p>
+
+    <div class="timeline-container">
+      {journey.map((item) => (
+        <TimelineItem {...item} />
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .section-description {
+    color: #888;
+    margin-top: 10px;
+    max-width: 600px;
+  }
+
+  .timeline-container {
+    position: relative;
+    padding: 20px 0;
+    margin-top: 40px;
+  }
+
+  .timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: #333;
+  }
+</style>

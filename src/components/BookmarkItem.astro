@@ -1,0 +1,105 @@
+---
+const { name, desc, href, displayUrl } = Astro.props;
+---
+
+<a href={href} target="_blank" class="bookmark-link">
+  <div class="bookmark-item">
+    <div class="bookmark-header">
+      <div class="bookmark-info">
+        <h3>{name}</h3>
+        <span class="display-url">{displayUrl}</span>
+      </div>
+      <div class="arrow-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-arrow">
+          <polyline points="7 7 17 7 17 17"></polyline>
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+        </svg>
+      </div>
+    </div>
+    <p class="bookmark-desc">{desc}</p>
+  </div>
+</a>
+
+<style>
+  .bookmark-link {
+    text-decoration: none;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .bookmark-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid #222;
+    padding: 16px 20px;
+    border-radius: 10px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bookmark-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: #333;
+    transform: translateX(4px);
+  }
+
+  .bookmark-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .bookmark-info {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .bookmark-info h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .display-url {
+    color: #555;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.8;
+  }
+
+  .bookmark-desc {
+    color: #888;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 90%;
+  }
+
+  .arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .external-arrow {
+    color: #444;
+    transition: all 0.2s ease;
+  }
+
+  .bookmark-item:hover .external-arrow {
+    color: #fff;
+    transform: translate(2px, -2px);
+  }
+
+  @media (max-width: 600px) {
+    .bookmark-info {
+      flex-direction: column;
+      gap: 2px;
+    }
+    .bookmark-header {
+      align-items: flex-start;
+    }
+  }
+</style>

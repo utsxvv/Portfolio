@@ -1,0 +1,59 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Project from "../components/Project.astro";
+
+const projects = [];
+---
+
+<Layout title="AI/ML | Utsav Patel" selectedItem="aiml">
+  <div class="back-nav-container">
+    <a href="/" class="back-nav-button w-inline-block">
+      <img src="/assets/svg/back.svg" loading="lazy" alt="" class="back-nav-img" />
+      <div>Back</div>
+    </a>
+  </div>
+
+  <div class="content-container">
+    <h1>AI/ML</h1>
+    <p class="section-description">
+      Exploration of machine learning models and their integration into modern web architectures, focusing on scalable and intelligent digital solutions.
+    </p>
+
+    <section class="items-container">
+      <div class="resouce-items">
+        {projects.length > 0 ? (
+          projects.map(project => (
+            <Project 
+              title={project.title} 
+              desc={project.desc}
+              tech={project.tech}
+              link={project.link}
+            />
+          ))
+        ) : (
+          <p class="coming-soon">Projects coming soon...</p>
+        )}
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .section-description {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #cccccc;
+    line-height: 1.6;
+  }
+  .coming-soon {
+    font-style: italic;
+    opacity: 0.6;
+    margin-top: 20px;
+    color: #888;
+  }
+  
+  .content-container {
+    max-width: 800px;
+  }
+</style>
