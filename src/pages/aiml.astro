@@ -2,7 +2,17 @@
 import Layout from "../layouts/Layout.astro";
 import Project from "../components/Project.astro";
 
-const projects = [];
+const projects = [
+    {
+    title: "PharmaLens - Handwritten Prescription OCR",
+    desc: [
+      "Built a handwritten medicine name recognition system using a custom CRNN model trained from scratch",
+      "Developed a data collection pipeline using Label Studio with automated cropping, CLAHE preprocessing, and augmentation to expand the training dataset.",
+    ],
+    tech: ["Python", "PyTorch", "CRNN", "Kaggle", "TensorFlow"],
+    link: "#"
+  },
+];
 ---
 
 <Layout title="AI/ML | Utsav Patel" selectedItem="aiml">
