@@ -5,11 +5,12 @@ import Project from "../components/Project.astro";
 const projects = [
     {
     title: "PharmaLens - Handwritten Prescription OCR",
+    summary: "Built a handwritten medicine name recognition system using a custom CRNN model and an automated preprocessing pipeline.",
     desc: [
       "Built a handwritten medicine name recognition system using a custom CRNN model trained from scratch",
       "Developed a data collection pipeline using Label Studio with automated cropping, CLAHE preprocessing, and augmentation to expand the training dataset.",
     ],
-    tech: ["Python", "PyTorch", "CRNN", "Kaggle", "TensorFlow"],
+    tech: ["Python", "PyTorch", "CRNN", "BiLSTM", "Kaggle"],
     link: "#"
   },
 ];
@@ -35,6 +36,7 @@ const projects = [
           projects.map(project => (
             <Project 
               title={project.title} 
+              summary={project.summary}
               desc={project.desc}
               tech={project.tech}
               link={project.link}

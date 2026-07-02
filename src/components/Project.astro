@@ -1,30 +1,161 @@
 ---
-const { title, desc, tech, link } = Astro.props;
+const { title, summary, desc, tech, link } = Astro.props;
+
+// Use explicit summary if provided, otherwise fallback to the first description bullet
+const projectSummary = summary || (desc && desc[0]) || "";
+
+// If summary was explicitly provided, show all description bullets in details.
+// If fallback summary was used, show remaining description bullets in details.
+const detailsDesc = summary ? desc : (desc ? desc.slice(1) : []);
+const hasDetails = detailsDesc && detailsDesc.length > 0;
 ---
 
-<div class="single-item">
-  <a href={link} target="_blank" class="project-title-link">
-    <h3>{title}</h3>
-  </a>
-  <div class="project-desc project-desc-list w-richtext">
-    <ul role="list">
-      {desc.map(item => <li>{item}</li>)}
-    </ul>
+<div class="single-item project-card">
+  <div class="project-header">
+    <a href={link} target="_blank" class="project-title-link">
+      <h3>{title}</h3>
+    </a>
   </div>
+  
+  {projectSummary && <p class="project-summary">{projectSummary}</p>}
+  
   <div class="mini-label-white">Technologies &amp; tools</div>
   <div class="chips-container">
-    {tech.map(techItem => <div class="single-chip">{techItem}</div>)}
+    {tech.map((techItem) => <div class="single-chip">{techItem}</div>)}
   </div>
+
+  {hasDetails && (
+    <div class="details-section">
+      <div class="details-collapse-wrapper">
+        <div class="details-collapse-inner">
+          <div class="project-desc project-desc-list w-richtext">
+            <ul role="list">
+              {detailsDesc.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <button class="details-toggle-btn" aria-expanded="false" aria-label="Toggle details">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
+  )}
 </div>
 
 <style>
+  .project-card {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background-color: rgba(53, 53, 53, 0.12);
+    border-radius: 12px;
+    padding: 28px 28px 12px 28px;
+  }
+
   .project-title-link {
     text-decoration: none;
-    color: inherit;
+    color: #fff;
     display: inline-block;
   }
 
   .project-title-link:hover h3 {
-    opacity: 0.8;
+    color: #3898ec;
+    transition: color 0.2s ease;
+  }
+
+  .project-summary {
+    color: #cccccc;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+
+  .details-section {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .details-toggle-btn {
+    background-color: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px auto 0 auto;
+    padding: 4px;
+    border-radius: 50%;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .details-toggle-btn:hover {
+    color: #3898ec;
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .chevron-icon {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .details-toggle-btn[aria-expanded="true"] .chevron-icon {
+    transform: rotate(180deg);
+  }
+
+  .details-collapse-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .details-collapse-wrapper.expanded {
+    grid-template-rows: 1fr;
+  }
+
+  .details-collapse-inner {
+    min-height: 0;
+  }
+
+  .project-desc {
+    padding-top: 8px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
   }
 </style>
+
+<script>
+  function setupDetailsToggles() {
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach((card) => {
+      const btn = card.querySelector('.details-toggle-btn');
+      const wrapper = card.querySelector('.details-collapse-wrapper');
+
+      if (btn && wrapper) {
+        // Prevent adding multiple click listeners if setup runs multiple times
+        btn.replaceWith(btn.cloneNode(true));
+        const newBtn = card.querySelector('.details-toggle-btn');
+
+        newBtn.addEventListener('click', () => {
+          const isExpanded = newBtn.getAttribute('aria-expanded') === 'true';
+          newBtn.setAttribute('aria-expanded', !isExpanded);
+
+          if (isExpanded) {
+            wrapper.classList.remove('expanded');
+          } else {
+            wrapper.classList.add('expanded');
+          }
+        });
+      }
+    });
+  }
+
+  // Initialize toggles
+  setupDetailsToggles();
+
+  // Re-run setup on client page navigation (if using View Transitions)
+  document.addEventListener('astro:page-load', setupDetailsToggles);
+</script>
+

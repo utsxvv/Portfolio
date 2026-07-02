@@ -5,6 +5,7 @@ import Project from "../components/Project.astro";
 const projects = [
   {
     title: "Suzora ERP - Real-Time Ceramic Tile Inventory Management System",
+    summary: "Built a cross-platform ERP for the tile industry using React and Capacitor with real-time inventory synchronization.",
     desc: [
       "Built a cross-platform ERP for the tile industry using React and Capacitor for Web and Android",
       "Integrated Firebase real-time listeners for instantaneous inventory synchronization across all devices",
@@ -16,6 +17,7 @@ const projects = [
   },
   {
     title: "Quick Link - Create short, custom URLs with Quick Link.",
+    summary: "Developed a modern, high-performance URL shortener featuring custom links, QR codes, and real-time analytics.",
     desc: [
       "Developed a modern URL shortener focused on speed, simplicity, and usability",
       "Implemented custom short links, QR code generation, and real-time link analytics",
@@ -27,6 +29,7 @@ const projects = [
   },
   {
     title: "Library Management System",
+    summary: "Created a web-based Library Management System utilizing Trie-based search and LRU caching for performance.",
     desc: [
       "Developed a web-based Library Management System to handle core library workflows",
       "Implemented book management, user authentication, and issue/return tracking",
@@ -38,6 +41,7 @@ const projects = [
   },
   {
     title: "TixHub - Movie Ticket Booking System",
+    summary: "Built a Django movie ticket booking platform featuring real-time seat locking and Razorpay integration.",
     desc: [
       "Built a Django-based movie ticket booking platform with real-time seat management",
       "Handled seat locking and availability updates during booking",
@@ -48,6 +52,8 @@ const projects = [
     link: "https://github.com/ShreyanshPadhiyar10/TixHub"
   },
 ];
+
+const ITEMS_PER_PAGE = 4;
 ---
 
 <Layout title="Software Development | Utsav Patel" selectedItem="software-development">
@@ -65,16 +71,154 @@ const projects = [
     </p>
 
     <section class="items-container">
-      <div class="resouce-items">
-        {projects.map(project => (
-          <Project 
-            title={project.title} 
-            desc={project.desc}
-            tech={project.tech}
-            link={project.link}
-          />
+      <div id="projects-list" class="resouce-items">
+        {projects.map((project, index) => (
+          <div class="project-wrapper" data-index={index} style={index >= ITEMS_PER_PAGE ? "display: none;" : ""}>
+            <Project 
+              title={project.title} 
+              summary={project.summary}
+              desc={project.desc}
+              tech={project.tech}
+              link={project.link}
+            />
+          </div>
         ))}
       </div>
     </section>
+
+    <div class="pagination-minimal">
+      <img 
+        id="prev-page" 
+        src="/assets/svg/back.svg" 
+        class="nav-icon disabled" 
+        alt="Previous" 
+        role="button"
+      />
+      
+      <div class="page-counter">
+        <span id="current-page-num">1</span>
+        <span class="divider">/</span>
+        <span>{Math.ceil(projects.length / ITEMS_PER_PAGE)}</span>
+      </div>
+
+      <img 
+        id="next-page" 
+        src="/assets/svg/back.svg" 
+        class="nav-icon flip" 
+        alt="Next" 
+        role="button"
+      />
+    </div>
   </div>
 </Layout>
+
+<script define:vars={{ ITEMS_PER_PAGE, totalItems: projects.length }}>
+  let currentPage = 1;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+  function updateDisplay(shouldScroll = true) {
+    const items = document.querySelectorAll('.project-wrapper');
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+
+    items.forEach((item, index) => {
+      item.style.display = (index >= start && index < end) ? 'block' : 'none';
+    });
+
+    const prevIcon = document.getElementById('prev-page');
+    const nextIcon = document.getElementById('next-page');
+    const pageNum = document.getElementById('current-page-num');
+
+    if (prevIcon) prevIcon.classList.toggle('disabled', currentPage === 1);
+    if (nextIcon) nextIcon.classList.toggle('disabled', currentPage === totalPages);
+    if (pageNum) pageNum.textContent = currentPage;
+    
+    if (shouldScroll) {
+      requestAnimationFrame(() => {
+        const listTop = document.getElementById('projects-list');
+        if (listTop) {
+          listTop.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    currentPage = 1;
+
+    document.getElementById('prev-page')?.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        updateDisplay(true);
+      }
+    });
+
+    document.getElementById('next-page')?.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        updateDisplay(true);
+      }
+    });
+    
+    updateDisplay(false);
+  });
+</script>
+
+<style>
+  .pagination-minimal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 48px;
+    width: 100%;
+  }
+
+  .nav-icon {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 0.4;
+    user-select: none;
+  }
+
+  .nav-icon:hover:not(.disabled) {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+
+  .nav-icon.disabled {
+    opacity: 0.05;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .flip {
+    transform: rotate(180deg);
+  }
+
+  .nav-icon.flip:hover:not(.disabled) {
+    transform: rotate(180deg) scale(1.1);
+  }
+
+  .page-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #444;
+    user-select: none;
+    letter-spacing: 2px;
+  }
+
+  #current-page-num {
+    color: #888;
+  }
+
+  .divider {
+    margin: 0 2px;
+    opacity: 0.2;
+  }
+</style>
