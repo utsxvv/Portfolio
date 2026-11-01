@@ -4,6 +4,16 @@ import Project from "../components/Project.astro";
 
 const projects = [
     {
+    title: "BookChat - PDF RAG Assistant",
+    summary: "Built an AI-powered PDF question-answering application using Retrieval-Augmented Generation (RAG), allowing users to upload books and interact with their content through a conversational interface.",
+    desc: [
+      "Developed a Streamlit-based application that allows users to upload PDF books, extract and split text into chunks, and store document embeddings in ChromaDB.",
+      "Implemented semantic search using Hugging Face embeddings and Maximum Marginal Relevance (MMR) retrieval to find relevant passages, with Groq-powered LLM responses and source page references."
+    ],
+    tech: ["Python", "LangChain", "RAG", "Hugging Face", "ChromaDB", "Groq", "Streamlit"],
+    link: "https://github.com/utsxvv/RAG_Book_Assistant"
+  },
+    {
     title: "PharmaLens - Handwritten Prescription OCR",
     summary: "Built a handwritten medicine name recognition system using a custom CRNN model and an automated preprocessing pipeline.",
     desc: [
@@ -11,7 +21,7 @@ const projects = [
       "Developed a data collection pipeline using Label Studio with automated cropping, CLAHE preprocessing, and augmentation to expand the training dataset.",
     ],
     tech: ["Python", "PyTorch", "CRNN", "BiLSTM", "Kaggle"],
-    link: "#"
+    link: "https://github.com/utsxvv/PharmaLens"
   },
 ];
 ---
