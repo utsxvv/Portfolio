@@ -4,15 +4,25 @@ import Project from "../components/Project.astro";
 
 const projects = [
     {
-    title: "BookChat - PDF RAG Assistant",
-    summary: "Built an AI-powered PDF question-answering application using Retrieval-Augmented Generation (RAG), allowing users to upload books and interact with their content through a conversational interface.",
-    desc: [
-      "Developed a Streamlit-based application that allows users to upload PDF books, extract and split text into chunks, and store document embeddings in ChromaDB.",
-      "Implemented semantic search using Hugging Face embeddings and Maximum Marginal Relevance (MMR) retrieval to find relevant passages, with Groq-powered LLM responses and source page references."
-    ],
-    tech: ["Python", "LangChain", "RAG", "Hugging Face", "ChromaDB", "Groq", "Streamlit"],
-    link: "https://github.com/utsxvv/RAG_Book_Assistant"
-  },
+      title: "Briefly - Multi-Agent AI Research System",
+      summary: "Built an AI-powered research assistant using multiple LangChain agents that search the web, read articles, write structured reports, and review their quality.",
+      desc: [
+        "Built an agent pipeline with LangChain and Groq where a Search Agent finds live web sources using Tavily and a Reader Agent scrapes full article content with BeautifulSoup.",
+        "Created a Writer Chain to generate structured reports with source links, an automated Critic Chain to score and review the report, and a Streamlit UI to track progress and download reports as Markdown."
+      ],
+      tech: ["Python", "LangChain", "Multi-Agent", "Groq", "Tavily API", "BeautifulSoup", "Streamlit"],
+      link: "https://briefly-reports.streamlit.app"
+    },
+    {
+      title: "BookChat - PDF RAG Assistant",
+      summary: "Built an AI-powered PDF question-answering application using Retrieval-Augmented Generation (RAG), allowing users to upload books and interact with their content through a conversational interface.",
+      desc: [
+        "Developed a Streamlit-based application that allows users to upload PDF books, extract and split text into chunks, and store document embeddings in ChromaDB.",
+        "Implemented semantic search using Hugging Face embeddings and Maximum Marginal Relevance (MMR) retrieval to find relevant passages, with Groq-powered LLM responses and source page references."
+      ],
+      tech: ["Python", "LangChain", "RAG", "Hugging Face", "ChromaDB", "Groq", "Streamlit"],
+      link: "https://github.com/utsxvv/RAG_Book_Assistant"
+    },
     {
     title: "PharmaLens - Handwritten Prescription OCR",
     summary: "Built a handwritten medicine name recognition system using a custom CRNN model and an automated preprocessing pipeline.",
